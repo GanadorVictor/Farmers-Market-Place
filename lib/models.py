@@ -44,6 +44,7 @@ class Order(Base):
     __tablename__='orders'
     id=Column(Integer,primary_key=True)
     consumer_name=Column(String,nullable=False)
+    produce_name=Column(String,nullable=False)
     produce_id=Column(Integer,ForeignKey('produce.id'),nullable=False)
     farmer_id=Column(Integer,ForeignKey('farmers.id'),nullable=False)
 
