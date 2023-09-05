@@ -65,11 +65,16 @@ def place_order(): #placing an order as a customer
         click.echo("Order made  successfully")
     else:
         click.echo("Order not successfully made")
-    # Add debug statements to help diagnose any issues
-    print(f"Consumer Name: {consumer_name}")
-    print(f"Product Name: {produce_name}")
-    #print(f"Product Found: {product}")
-    #print(f"New Order: {new_order}")
+
+#list of all the order a farmer has 
+@cli.command()
+def list_orders():
+    """viewing the orders a farmer has"""
+    farmer_id =click.prompt("Enter your farmer ID")
+    farmer =session.query(Farmer).filter_by(id=farmer_id).all() #querying the farmer based on the given id
+
+    if farmer: #if the output is true
+
 
 if __name__ == '__main__':
     cli()
