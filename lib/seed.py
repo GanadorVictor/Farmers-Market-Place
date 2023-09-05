@@ -37,7 +37,7 @@ session.commit()
 
 #adding data to the produce table
 for j in range(10):
-   random_farmer = random.choice(farmers)  # Select a random farmer
+   random_farmer = random.choice(farmers)  # Selecting  a random farmer
    produce= Produce(
          name=fake.name(),
          price=random.randint(0, 100000),
@@ -45,6 +45,20 @@ for j in range(10):
    )
  
    session.add(produce)
+session.commit()
+
+#adding data to the order table
+produce_list = session.query(Produce).all() #querying the produce table to return all the data as a list
+for h in range(10):
+   random_farmer = random.choice(farmers)  # Selecting a random farmer
+   random_produce =random.choice(produce_list) #selecting a random produce from the list
+   order= Order(
+         consumer_name=fake.name(),
+         farmer_id=random_farmer.id,
+         produce_id =random_produce.id
+   )
+ 
+   session.add(order)
 session.commit()
         
 
