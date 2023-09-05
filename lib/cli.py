@@ -16,7 +16,7 @@ def cli():
     """ Farmer Market Place"""
 
 @cli.command()
-def farmer_profile():
+def farmer_profile(): # creating a farmer profile 
     """Create a new farmer profile"""
     click.echo("Enter farmer details:")
     name=click.prompt("Name")
@@ -30,6 +30,23 @@ def farmer_profile():
     session.commit()
     click.echo("Created new farmer profile successfully!")
 
+@cli.command()
+def add_produce(): #adding a new produce
+    """add new product"""
+    click.echo("Enter new produce details:")
+    name = click.prompt("Enter Product  name:")
+    price =click.prompt("Price ",type=float)
+
+    farmer_id =click.prompt("Enter your farmer ID")
+    new_farmer = session.query(Farmer).filter_by(id=farmer_id).first() #querying the farmers table and filtering by id 
+
+    if new_farmer: #if the output is true add the produce to the table 
+        produce = Produce(name=name,price=price, farmer=new_farmer)
+        session.add(produce)
+        session.commit()
+        click.echo("Product listed successfully.")
+    else:
+        click.echo("Farmer not found.")
 
 
 if __name__ == '__main__':
