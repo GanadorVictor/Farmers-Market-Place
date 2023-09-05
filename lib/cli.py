@@ -48,6 +48,28 @@ def add_produce(): #adding a new produce
     else:
         click.echo("Farmer not found.")
 
+@cli.command()
+def place_order(): #placing an order as a customer
+    """place order as consumer"""
+    click.echo("Enter order details:")
+    consumer_name= click.prompt("Your Name")
+    produce_name =click.prompt("Enter the produce name you want to order")
+
+#finding the product by name
+    product = session.query(Produce).filter_by(name=produce_name).first() 
+
+    if product:
+        new_order=Order(consumer_name=consumer_name,produce_name=produce_name, produce_id=product.id, farmer_id=product.farmer.id)
+        session.add(new_order)
+        session.commit()
+        click.echo("Order made  successfully")
+    else:
+        click.echo("Order not successfully made")
+    # Add debug statements to help diagnose any issues
+    print(f"Consumer Name: {consumer_name}")
+    print(f"Product Name: {produce_name}")
+    #print(f"Product Found: {product}")
+    #print(f"New Order: {new_order}")
 
 if __name__ == '__main__':
     cli()
