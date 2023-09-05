@@ -36,7 +36,7 @@ session.add_all(farmers)
 session.commit()
 
 #adding data to the produce table
-produce_names = ['Apples', 'Bananas', 'Carrots', 'Lettuce', 'Potatoes', 'Tomatoes', 'Cucumbers', 'Wheat' 'Oranges', 'Grapes', 'Pumpkins']
+produce_names = ['apples', 'bananas', 'carrots', 'lettuce', 'potatoes', 'tomatoes', 'cucumbers', 'wheat' 'oranges', 'Grapes', 'Pumpkins']
 for j in range(10):
    random_farmer = random.choice(farmers)  # Selecting  a random farmer
    produce= Produce(
@@ -56,6 +56,7 @@ for h in range(10):
    order= Order(
          consumer_name=fake.name(),
          farmer_id=random_farmer.id,
+         produce_name=random.choice(produce_names),
          produce_id =random_produce.id
    )
  
