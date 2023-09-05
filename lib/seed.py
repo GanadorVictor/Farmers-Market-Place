@@ -34,3 +34,18 @@ for i in range(10)] #creating 10 records
 #adding the session
 session.add_all(farmers)
 session.commit()
+
+#adding data to the produce table
+for j in range(10):
+   random_farmer = random.choice(farmers)  # Select a random farmer
+   produce= Produce(
+         name=fake.name(),
+         price=random.randint(0, 100000),
+         farmer_id=random_farmer.id
+   )
+ 
+   session.add(produce)
+session.commit()
+        
+
+
