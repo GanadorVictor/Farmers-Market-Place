@@ -51,3 +51,13 @@ class Orders(Base):
 produce =relationship('Produce',back_populates='orders') #many to one 1 produce can have many orders
 farmer=relationship('Farmer',back_populates='orders') #one farmer can have many orders
 
+#consumers table
+class Consumer(Base):
+    __tablename__='consumers'
+    id=Column(Integer,primary_key=True)
+    name=Column(String,nullable=False)
+    order_id=Column(Integer,ForeignKey('orders.id')) #foreign key to relate the order table
+
+    #relationship
+    orders=relationship('Order',back_populates='consumer')
+
