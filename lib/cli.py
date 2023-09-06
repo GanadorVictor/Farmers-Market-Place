@@ -80,6 +80,18 @@ def list_orders():
             for order in orders:
                 click.echo(f"Consumer: {order.consumer_name}, Product: {order.produce.name}")
 
+#leaving a review for a product
+@cli.command()
+def review():
+    """leaving a review for a produce"""
+    produce_name=click.prompt("Enter the produce name")
+    review=click.prompt("Enter a rating  for the product between 1-10",type=int)
+
+    #checking if it's within the range
+    if 1<= review <=10:
+        reviewed_produce=session.query(Produce).filter_by(name=produce_name).first()
+    
+
 if __name__ == '__main__':
     cli()
     Session = Session()
