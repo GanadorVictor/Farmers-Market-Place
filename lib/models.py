@@ -34,6 +34,7 @@ class Produce(Base):
     name=Column(String,nullable=False)
     farmer_id =Column(Integer,ForeignKey('farmers.id'))
     price=Column(Integer,nullable=False)
+    review = Column(Integer, nullable=True)
 
     #relationships
     farmer = relationship('Farmer',back_populates='produce') # one farmer can produce many produce many-one
