@@ -42,7 +42,8 @@ for j in range(10):
    produce= Produce(
          name=random.choice(produce_names),
          price=random.randint(0, 100000),
-         farmer_id=random_farmer.id
+         farmer_id=random_farmer.id,
+         review=random.randint(0,10)
    )
  
    session.add(produce)
