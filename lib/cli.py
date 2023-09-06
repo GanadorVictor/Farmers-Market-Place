@@ -71,10 +71,14 @@ def place_order(): #placing an order as a customer
 def list_orders():
     """viewing the orders a farmer has"""
     farmer_id =click.prompt("Enter your farmer ID")
-    farmer =session.query(Farmer).filter_by(id=farmer_id).all() #querying the farmer based on the given id
+    selected_farmer =session.query(Farmer).filter_by(id=farmer_id).first() #querying the farmer based on the given id
 
-    if farmer: #if the output is true
-
+    if selected_farmer: #if the output is true
+      orders = session.query(Order).filter(Order.farmer_id == selected_farmer.id).all()
+    if orders:
+            click.echo("List of Orders:")
+            for order in orders:
+                click.echo(f"Consumer: {order.consumer_name}, Product: {order.produce.name}")
 
 if __name__ == '__main__':
     cli()
