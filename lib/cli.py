@@ -90,8 +90,13 @@ def review():
     #checking if it's within the range
     if 1<= review <=10:
         reviewed_produce=session.query(Produce).filter_by(name=produce_name).first()
-    
-
+    if reviewed_produce:
+        review=Produce(name=reviewed_produce.name,review=review,price=reviewed_produce.price,farmer_id=reviewed_produce.farmer_id)
+        session.add(review)
+        session.commit()
+        click.echo("review made successfully")
+    else:
+        click.echo("product not found")
 if __name__ == '__main__':
     cli()
     Session = Session()
