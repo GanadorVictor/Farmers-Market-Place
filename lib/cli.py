@@ -19,7 +19,12 @@ def cli():
 def farmer_profile(): # creating a farmer profile 
     """Create a new farmer profile"""
     click.echo("Enter farmer details:")
-    name=click.prompt("Name")
+    while True:
+        name = click.prompt("Name",default='')
+        if name:
+            break  # Exiting  the loop if a non-empty name is provided
+        else:
+            click.echo("Name cannot be empty. Please provide a name.")
     email= click.prompt("Enter email")
     phone_number=click.prompt("Enter phone Number")
     city=click.prompt("Enter City")
