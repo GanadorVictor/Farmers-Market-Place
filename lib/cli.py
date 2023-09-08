@@ -40,7 +40,13 @@ def farmer_profile(): # creating a farmer profile
                 click.echo("Phone Number must be a numeric value.")
         else:
             click.echo("Phone Number cannot be empty. Please provide a phone number.")
-    city=click.prompt("Enter City")
+    while True:
+        city = click.prompt("Enter City",default='')
+        if city:
+            break  # Exiting  the loop if a non-empty city is provided
+        else:
+            click.echo("City cannot be empty. Please provide a city.")
+
 
 #creating a new farmer record and adding it to the database
     new_farmer=Farmer(name=name,email=email,phone_number=phone_number,city=city)
