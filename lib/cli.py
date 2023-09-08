@@ -100,8 +100,18 @@ def add_produce(): #adding a new produce
 def place_order(): #placing an order as a customer
     """place order as consumer"""
     click.echo("Enter order details:")
-    consumer_name= click.prompt("Your Name")
-    produce_name =click.prompt("Enter the produce name you want to order")
+    while True:
+        consumer_name = click.prompt("Your Name")
+        if consumer_name:
+            break  # non-empty consumer_name is provided
+        else:
+            click.echo("Consumer Name cannot be empty. Please provide your name.")
+    while True:
+        produce_name = click.prompt("Enter the produce name you want to order")
+        if produce_name:
+            break #a non-empty produce_name is provided
+        else:
+            click.echo("Produce Name cannot be empty. Please provide a produce name.")
 
 #finding the product by name
     product = session.query(Produce).filter_by(name=produce_name).first() 
