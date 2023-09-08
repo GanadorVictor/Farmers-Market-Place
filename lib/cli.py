@@ -131,13 +131,16 @@ def list_orders():
     farmer_id =click.prompt("Enter your farmer ID")
     selected_farmer =session.query(Farmer).filter_by(id=farmer_id).first() #querying the farmer based on the given id
 
-    if selected_farmer: #if the output is true
-      orders = session.query(Order).filter(Order.farmer_id == selected_farmer.id).all()
-    if orders:
+    if selected_farmer: #if the output is true 
+        orders = session.query(Order).filter(Order.farmer_id == selected_farmer.id).all()
+        if orders:
             click.echo("List of Orders:")
             for order in orders:
                 click.echo(f"Consumer: {order.consumer_name}, Product: {order.produce.name}")
-
+        else:
+            click.echo("You currently have no orders.") #if there is no output
+    else:
+        click.echo("Farmer not found.")
 #leaving a review for a product
 @cli.command()
 def review():
