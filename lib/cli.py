@@ -58,10 +58,34 @@ def farmer_profile(): # creating a farmer profile
 def add_produce(): #adding a new produce
     """add new product"""
     click.echo("Enter new produce details:")
-    name = click.prompt("Enter Product  name:")
-    price =click.prompt("Price ",type=float)
+    while True:
+        name = click.prompt("Enter Product name",default='')
+        if name:
+            break  # Exiting  the loop if a non-empty name is provided
+        else:
+            click.echo("Product name cannot be empty. Please provide a name.")
 
-    farmer_id =click.prompt("Enter your farmer ID")
+    while True:
+        try:
+            price = click.prompt("Price", type=float)
+            if price <= 0: #if its less than 0 
+                click.echo("Price must be a positive number.")
+            else:
+                break  # Exiting  the loop if a valid price is provided
+        except ValueError:
+            click.echo("Price must be a numeric value.")
+
+
+    while True:
+        farmer_id = click.prompt("Enter your farmer ID" , default='')
+        if farmer_id:
+            if farmer_id.isdigit():  # Validating  that input is a numeric string
+                break  # Exiting  the loop if a valid farmer ID is provided
+            else:
+                click.echo("Farmer ID must be a numeric value.")
+        else:
+            click.echo("Farmer ID cannot be empty. Please provide a farmer ID.")
+
     new_farmer = session.query(Farmer).filter_by(id=farmer_id).first() #querying the farmers table and filtering by id 
 
     if new_farmer: #if the output is true add the produce to the table 
